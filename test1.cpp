@@ -14,8 +14,8 @@
 using namespace std;
 
 static const int N = 10000;
-static std::vector<char> order(19,-1);
-static std::vector<char> orderNew(19,-1);
+static std::vector<char> order(25,-1);
+static std::vector<char> orderNew(25,-1);
 
 std::vector<char> load_alphabet(const std::string& filename) {
     std::ifstream file(filename);
@@ -340,9 +340,9 @@ std::string division_into_parts(const std::string& filename) {
 }
 
 void CodingHuffmanNew(const std::string& substring, const std::string& s_output, const std::vector<std::vector<int>>& C, int world_rank, int world_size) {
-    static std::vector<char> orderNew(19, -1);
+    static std::vector<char> orderNew(25, -1);
     if(world_rank == 0){
-        for (int i = 0; i < 19; i++) {
+        for (int i = 0; i < 25; i++) {
             if (order[i] == '0') orderNew[i] = 'q';
             else if (order[i] == '1') orderNew[i] = 'w';
             else if (order[i] == '2') orderNew[i] = 'e';
