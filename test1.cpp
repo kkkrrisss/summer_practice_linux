@@ -486,7 +486,7 @@ int main(int argc, char** argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     //std::vector<char> alphabet = load_alphabet("symbols.txt");
     std::vector<char> alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f',' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '.' };
-    std::cout <<alphabet.size();
+    //std::cout <<alphabet.size();
     if (alphabet.empty()) {
         MPI_Finalize();
         return 1;
@@ -498,7 +498,7 @@ int main(int argc, char** argv) {
     std::vector<std::vector<int>> C_rectangular;
     int k1=0, k2=0, k3 = 0, k4 = 0;
 	
-    std::cout << "На узле " << world_rank << " сгенерировано " << symbols.size() << " символов.\n";
+    std::cout << "host" << world_rank << " сгенерировал " << symbols.size() << " символов.\n";
     if (world_rank == 0) {
         for (int i = 1; i < world_size; ++i) {
             int count;
@@ -513,7 +513,7 @@ int main(int argc, char** argv) {
             symbols.insert(symbols.end(), other_symbols.begin(), other_symbols.end());
         }
 
-        std::cout << "Узел с rank 0 получил " << symbols.size() << " символов.\n";
+        //std::cout << "Узел с rank 0 получил " << symbols.size() << " символов\n";
 	    
         std::ofstream file("Library.txt");
         if (!file) {
@@ -585,7 +585,7 @@ int main(int argc, char** argv) {
 	MPI_Send(&orderSize, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
 	MPI_Send(order.data(), orderSize, MPI_CHAR, i, 0, MPI_COMM_WORLD);
 	}
-	std::cout << "Отправилось с rank =0 "<< std::endl; 
+	//std::cout << "Отправилось с rank =0 "<< std::endl; 
 	
     }
     else {
@@ -678,7 +678,12 @@ else {
 
 if (world_rank == 0) {
 	bool flag1 = Check("Library.txt", "Decoding.txt");
-	cout << "CheckHuffman:  " << flag1 << endl;
+	if (flag1){
+		std::cout << "Проверка Хаффмена —  все верно" << std::endl;
+	}
+	else{
+		std::cout << "Проверка Хаффмена —  декодирование неуспешно << std::endl;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////// CodingRLE
@@ -689,7 +694,13 @@ DecodingRLE_MPI("CodingRLE","DecodingRLE",world_rank,world_size,k2);
 
   if (world_rank == 0) {
 	bool flag2 = Check("Library.txt", "DecodingRLE.txt");
-	std::cout << "CheckRLE:  " << flag2 << std::endl;
+	if (flag2){
+		std::cout << "Проверка RLE —  все верно" << std::endl;
+	}
+	else{
+		std::cout << "Проверка RLE —  декодирование неуспешно << std::endl;
+	}
+	
 	//std::cout << "Сompression ratio RLE: " << 10000. / k2 << std::endl;
 	//td::cout << "Сompression ratio : " << 10000. / k1 << std::endl;
   }
