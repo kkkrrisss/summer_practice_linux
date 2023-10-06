@@ -9,9 +9,9 @@
 #include <Windows.h>            
 #include <sstream>
 
-using namespace std;//предусмотрение возможности изменять размер массива arr
-static const int N = 10000; //количество всех символов в файле
-static char arr[] = { 'ж', 'з', 'и', 'к', 'л', 'м', ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '.' };
+using namespace std;//ГЇГ°ГҐГ¤ГіГ±Г¬Г®ГІГ°ГҐГ­ГЁГҐ ГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГЁ ГЁГ§Г¬ГҐГ­ГїГІГј Г°Г Г§Г¬ГҐГ° Г¬Г Г±Г±ГЁГўГ  arr
+static const int N = 10000; //ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГўГ±ГҐГµ Г±ГЁГ¬ГўГ®Г«Г®Гў Гў ГґГ Г©Г«ГҐ
+static char arr[] = { 'СЃ', 'СЉ', 'Рё', 'Рє', 'С†', 'Рѕ','РЎ', 'РЄ', 'Р', 'Рљ', 'Р¦', 'Рћ', ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '.' };
 static char order[19] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 static char orderNew[19] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 };
 
@@ -19,13 +19,13 @@ vector<double> CreateFile() {
 	FILE* pFile;
 	fopen_s(&pFile, "Library.txt", "w");
 	int i;
-	vector<int> entry(19, 0);
-	vector<double> probability(19, 0);
+	vector<int> entry(25, 0);
+	vector<double> probability(25, 0);
 	char num;
 	int index;
 	for (i = 0; i < N; ++i)
 	{
-		index = rand() % 19 ;
+		index = rand() % 25 ;
 		num = arr[index];
 		entry[index]++;
 		fwrite(&num, 1, sizeof(num), pFile);
@@ -39,9 +39,9 @@ vector<double> CreateFile() {
 }
 
 int UP(vector <double>& P, double q) {
-// n-длинна обрабатываемой части массива
-// q-вставляемая сумма
-	int j = P.size(); //место вставляемого элемента
+// n-Г¤Г«ГЁГ­Г­Г  Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬Г®Г© Г·Г Г±ГІГЁ Г¬Г Г±Г±ГЁГўГ 
+// q-ГўГ±ГІГ ГўГ«ГїГҐГ¬Г Гї Г±ГіГ¬Г¬Г 
+	int j = P.size(); //Г¬ГҐГ±ГІГ® ГўГ±ГІГ ГўГ«ГїГҐГ¬Г®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ 
 	vector<double> m_P;
 	m_P.resize(j-1);
 	for (int i = 0; i < P.size(); i++) {
@@ -58,12 +58,12 @@ int UP(vector <double>& P, double q) {
 		m_P[i] = P[i];
 	}
 	P = m_P;
-	return j; //номер вставляемого элемента
+	return j; //Г­Г®Г¬ГҐГ° ГўГ±ГІГ ГўГ«ГїГҐГ¬Г®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ 
 }
 
 void Down(vector<vector<int>>& C, vector<int>& len, int n, int j) {
-// n - длинна обрабатываемой части массива
-// j - номер буквы, которая временно исключается
+// n - Г¤Г«ГЁГ­Г­Г  Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬Г®Г© Г·Г Г±ГІГЁ Г¬Г Г±Г±ГЁГўГ 
+// j - Г­Г®Г¬ГҐГ° ГЎГіГЄГўГ», ГЄГ®ГІГ®Г°Г Гї ГўГ°ГҐГ¬ГҐГ­Г­Г® ГЁГ±ГЄГ«ГѕГ·Г ГҐГІГ±Гї
 	vector<int> c = C[j];
 	int l = len[j];
 	for (int i = j; i <= n - 2; i++) {
@@ -136,7 +136,7 @@ string CodingHuffmanNew(string s_input, string s_output, vector<vector<int>> C) 
 	ifstream input(s_input);
 	string string;
 	ofstream output(s_output);
-	for (int i = 0; i < 19; i++) {
+	for (int i = 0; i < 25; i++) {
 		if (order[i] == '0') orderNew[i] = 'q';
 		else if (order[i] == '1') orderNew[i] = 'w';
 		else if (order[i] == '2') orderNew[i] = 'e';
@@ -203,13 +203,13 @@ string DecodingHuffman(string s_input, string s_output, vector<vector<int>> C, i
 			if (string[n] == '1') code.push_back(1);
 			for (int i = 0; i < C.size(); i++) {
 				if (code == C[i]) {
-					flag = 1;//нашелся
+					flag = 1;//Г­Г ГёГҐГ«Г±Гї
 					j = i;
 				}
 			}
 			if (flag) {
 				code.clear();
-				result += order[j];  //И записываешь эту строку в выходной файл
+				result += order[j];  //Г€ Г§Г ГЇГЁГ±Г»ГўГ ГҐГёГј ГЅГІГі Г±ГІГ°Г®ГЄГі Гў ГўГ»ГµГ®Г¤Г­Г®Г© ГґГ Г©Г«
 				flag = 0;
 			}
 			n++;
@@ -379,10 +379,10 @@ int main() {
 	//setlocale(LC_ALL, "Russian");
 	srand(time(NULL));
 	vector<double> probability = CreateFile();
-	double coding_price=0; // цена кодирования
+	double coding_price=0; // Г¶ГҐГ­Г  ГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГї
 	vector<vector<int>> C;
 	vector<int> len;
-	//vector<double> P = {0.2, 0.2, 0.19, 0.12, 0.11, 0.09, 0.09}; //проверка алгоритма Хаффмена
+	//vector<double> P = {0.2, 0.2, 0.19, 0.12, 0.11, 0.09, 0.09}; //ГЇГ°Г®ГўГҐГ°ГЄГ  Г Г«ГЈГ®Г°ГЁГІГ¬Г  Г•Г ГґГґГ¬ГҐГ­Г 
 	vector<double> P = probability;
 	//j = UP(P, 0.1);
 
@@ -403,9 +403,9 @@ int main() {
 
 	for (int i = 0; i < C.size(); i++) {
 		for (int z = 0; z < C.size(); z++) {
-			if (probability[i] == m_P[z]) { // prob - исходный порядо букв в массиве,  m_P - отсортированный
+			if (probability[i] == m_P[z]) { // prob - ГЁГ±ГµГ®Г¤Г­Г»Г© ГЇГ®Г°ГїГ¤Г® ГЎГіГЄГў Гў Г¬Г Г±Г±ГЁГўГҐ,  m_P - Г®ГІГ±Г®Г°ГІГЁГ°Г®ГўГ Г­Г­Г»Г©
 				if (order[z] == -1) {
-					order[z] = arr[i]; //создаем текущий порядок букв
+					order[z] = arr[i]; //Г±Г®Г§Г¤Г ГҐГ¬ ГІГҐГЄГіГ№ГЁГ© ГЇГ®Г°ГїГ¤Г®ГЄ ГЎГіГЄГў
 					cout << arr[i] << " - ";
 					for (int j = 0; j < C[z].size(); j++) {
 						cout << C[z][j];
@@ -422,9 +422,9 @@ int main() {
 	}
 
 	cout << "\n";
-	cout << "Цена кодирования - " << coding_price << endl;
+	cout << "Г–ГҐГ­Г  ГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГї - " << coding_price << endl;
 
-	//Новый порядок с их кодированием
+	//ГЌГ®ГўГ»Г© ГЇГ®Г°ГїГ¤Г®ГЄ Г± ГЁГµ ГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГҐГ¬
 	//for (int i = 0; i < C.size(); i++) {
 	//	cout << order[i] << " - ";
 	//	for (int j = 0; j < C[i].size(); j++) {
@@ -444,14 +444,14 @@ int main() {
 	string decodingRLE = DecodingRLE("CodingRLE.txt", "DecodingRLE.txt", k2);
 	bool flag2 = Check("Library.txt", "DecodingRLE.txt" );
 	cout << "CheckRLE:  " << flag2 << endl;
-	cout << "Сompression ratio RLE: " << 10000. / k2 << endl;
-	cout << "Сompression ratio : " << 10000. / k1 << endl;
+	cout << "Г‘ompression ratio RLE: " << 10000. / k2 << endl;
+	cout << "Г‘ompression ratio : " << 10000. / k1 << endl;
 
 	string v1 = Twice1(k3);
 	string v2 = Twice2(k4, C);
 
-	cout << "Сompression ratio : " << 10000. / k3 << endl;
-	cout << "Сompression ratio : " << 10000. / k4 << endl;
+	cout << "Г‘ompression ratio : " << 10000. / k3 << endl;
+	cout << "Г‘ompression ratio : " << 10000. / k4 << endl;
 
 	return 0;
 }
