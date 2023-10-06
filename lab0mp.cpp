@@ -706,11 +706,11 @@ DecodingRLE_MPI("CodingRLE","DecodingRLE",world_rank,world_size,k2);
   }
 
 std::string substring1 = division_into_parts("Coding.txt");
-CodingRLE_MPI("ResultCodingTwice1", substring, world_rank, world_size);
+CodingRLE_MPI("HafRle", substring, world_rank, world_size);
 std::string substring2 = division_into_parts("CodingRLE.txt");
-CodingHuffmanNew(substring2,"ResultCodingTwice2", C_rectangular, world_rank, world_size);
+CodingHuffmanNew(substring2,"RleHaf", C_rectangular, world_rank, world_size);
  if (world_rank == 0) {
-	std::ifstream input("ResultCodingTwice1.txt");
+	std::ifstream input("HafRle.txt");
         std::string str;
         int num = 0;
 
@@ -719,7 +719,7 @@ CodingHuffmanNew(substring2,"ResultCodingTwice2", C_rectangular, world_rank, wor
         }
         k3 = num;
 	//cout << "Сompression ratio : " << 10000. / k3 << endl;
-	std::ifstream input1("ResultCodingTwice2.txt");
+	std::ifstream input1("RleHaf.txt");
         std::string str1;
         int num1 = 0;
 
