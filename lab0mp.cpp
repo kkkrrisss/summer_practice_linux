@@ -484,9 +484,7 @@ int main(int argc, char** argv) {
 
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
-    //std::vector<char> alphabet = load_alphabet("symbols.txt");
     std::vector<char> alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f',' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '.' };
-    //std::cout <<alphabet.size();
     if (alphabet.empty()) {
         MPI_Finalize();
         return 1;
@@ -528,10 +526,7 @@ int main(int argc, char** argv) {
         file.close();
 
         std::cout << "В файл записано " << symbols.size() << " символов.\n";
-	// конец генерации !!
 
-
-	    
  	std::vector<double> probabilities = compute_probabilities(symbols, alphabet);
         std::vector<vector<int>> C(probabilities.size());
 	std::cout << C.size() << std::endl;
@@ -567,13 +562,6 @@ int main(int argc, char** argv) {
 	C_rectangular = transform_to_rectangle(C);
 	int numRows = C_rectangular.size();
         int numCols = C_rectangular[0].size();
-	// for (const auto& row : C_rectangular) {
- //        for (int val : row) {
- //            std::cout << val << ' ';
- //        }
- //        std::cout << '\n';
- //    	}	
- //    	std::cout << std::endl;
 
 	for (int i = 1; i < world_size; ++i) {
 	MPI_Send(&numRows, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
@@ -606,20 +594,11 @@ int main(int argc, char** argv) {
 	order.resize(orderSize);
 	MPI_Recv(order.data(), orderSize, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-     //    for (const auto& row : C_rectangular) {
-     //    for (int val : row) {
-     //        std::cout << val << ' ';
-     //    }
-     //    std::cout << '\n';
-    	// }	
-    	// std::cout << std::endl;	
-    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////	
 MPI_Barrier(MPI_COMM_WORLD);
 	
 std::string substring = division_into_parts("Library.txt");
-//std::cout <<world_rank << ":\t" << substring <<std::endl;
     if (world_rank == 0) {
         std::string encoded = CodingHuffman("Coding", C_rectangular, substring);
         for (int i = 1; i < world_size; ++i) {
