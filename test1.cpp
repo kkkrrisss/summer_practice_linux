@@ -172,7 +172,7 @@ std::string CodingRLE(std::string chunk) {
         } else {
             if (chunk[i - 1] == '0') result += 'q';
             else if (chunk[i - 1] == '1') result += 'w';
-            else if (chunk[i - 1] == '2') result += 'e';
+            else if (chunk[i - 1] == '2') result += 'h';
             else if (chunk[i - 1] == '3') result += 'r';
             else if (chunk[i - 1] == '4') result += 't';
             else if (chunk[i - 1] == '5') result += 'y';
@@ -189,7 +189,7 @@ std::string CodingRLE(std::string chunk) {
         if (i == chunk.size() - 1) {
             if (chunk[i] == '0') result += 'q';
             else if (chunk[i] == '1') result += 'w';
-            else if (chunk[i] == '2') result += 'e';
+            else if (chunk[i] == '2') result += 'h';
             else if (chunk[i] == '3') result += 'r';
             else if (chunk[i] == '4') result += 't';
             else if (chunk[i] == '5') result += 'y';
@@ -215,7 +215,7 @@ std::string DecodingRLE(const std::string& input_string, int& k) {
         for (int i = 0; i < count; i++) {
             if (symbol == 'q') result += '0';
             else if (symbol == 'w') result += '1';
-            else if (symbol == 'e') result += '2';
+            else if (symbol == 'h') result += '2';
             else if (symbol == 'r') result += '3';
             else if (symbol == 't') result += '4';
             else if (symbol == 'y') result += '5';
@@ -345,7 +345,7 @@ void CodingHuffmanNew(const std::string& substring, const std::string& s_output,
         for (int i = 0; i < 25; i++) {
             if (order[i] == '0') orderNew[i] = 'q';
             else if (order[i] == '1') orderNew[i] = 'w';
-            else if (order[i] == '2') orderNew[i] = 'e';
+            else if (order[i] == '2') orderNew[i] = 'h';
             else if (order[i] == '3') orderNew[i] = 'r';
             else if (order[i] == '4') orderNew[i] = 't';
             else if (order[i] == '5') orderNew[i] = 'y';
@@ -485,7 +485,7 @@ int main(int argc, char** argv) {
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     //std::vector<char> alphabet = load_alphabet("symbols.txt");
-    std::vector<char> alphabet = { 'a', 's', 'd', 'f', 'g', 'h', ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '.' };
+    std::vector<char> alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f',' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '.' };
     std::cout <<alphabet.size();
     if (alphabet.empty()) {
         MPI_Finalize();
