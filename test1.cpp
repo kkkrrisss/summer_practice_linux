@@ -563,10 +563,6 @@ int main(int argc, char** argv) {
 	}
 	std::cout << "\n";
 	std::cout << "Цена кодирования - " << coding_price << endl;
-	std::cout << "Вектор последовательности символов - ";
-	for (char val : order) {
-            std::cout << val << ' ';
-        }
         std::cout << '\n';   
 	C_rectangular = transform_to_rectangle(C);
 	int numRows = C_rectangular.size();
