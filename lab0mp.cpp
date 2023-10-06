@@ -682,7 +682,7 @@ if (world_rank == 0) {
 		std::cout << "Проверка Хаффмена —  все верно" << std::endl;
 	}
 	else{
-		std::cout << "Проверка Хаффмена —  декодирование неуспешно << std::endl;
+		std::cout << "Проверка Хаффмена —  декодирование неуспешно" << std::endl;
 	}
 }
 
@@ -698,7 +698,7 @@ DecodingRLE_MPI("CodingRLE","DecodingRLE",world_rank,world_size,k2);
 		std::cout << "Проверка RLE —  все верно" << std::endl;
 	}
 	else{
-		std::cout << "Проверка RLE —  декодирование неуспешно << std::endl;
+		std::cout << "Проверка RLE —  декодирование неуспешно" << std::endl;
 	}
 	
 	//std::cout << "Сompression ratio RLE: " << 10000. / k2 << std::endl;
